@@ -4,8 +4,9 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import org.szernex.usc.core.HealthManager;
 import org.szernex.usc.handler.ConfigHandler;
-import org.szernex.usc.handler.PlayerTickHandler;
+import org.szernex.usc.handler.PlayerHandler;
 
 import java.io.File;
 
@@ -29,6 +30,8 @@ public class Main
 	@Mod.EventHandler
 	public void serverStarted(FMLServerStartedEvent event)
 	{
-		FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
+		FMLCommonHandler.instance().bus().register(new PlayerHandler());
+
+		HealthManager.getInstance().init();
 	}
 }
