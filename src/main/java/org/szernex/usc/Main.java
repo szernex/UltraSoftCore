@@ -4,6 +4,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.common.MinecraftForge;
 import org.szernex.usc.core.HealthManager;
 import org.szernex.usc.handler.ConfigHandler;
 import org.szernex.usc.handler.PlayerHandler;
@@ -30,7 +31,10 @@ public class Main
 	@Mod.EventHandler
 	public void serverStarted(FMLServerStartedEvent event)
 	{
-		FMLCommonHandler.instance().bus().register(new PlayerHandler());
+		PlayerHandler player_handler = new PlayerHandler();
+
+		FMLCommonHandler.instance().bus().register(player_handler);
+		MinecraftForge.EVENT_BUS.register(player_handler);
 
 		HealthManager.getInstance().init();
 	}
