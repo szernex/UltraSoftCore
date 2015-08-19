@@ -4,11 +4,11 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.szernex.usc.core.HealthManager;
+import org.szernex.usc.core.PlayerDataManager;
 import org.szernex.usc.core.USCExtendedPlayer;
 import org.szernex.usc.util.LogHelper;
 
@@ -40,7 +40,7 @@ public class PlayerHandler
 	/**
 	 * Only handles deaths of EntityPlayer's.
 	 *
-	 * @param event
+	 * @param event The LivingDeathEvent.
 	 */
 	@SubscribeEvent
 	public void onPlayerDeath(LivingDeathEvent event)
@@ -48,21 +48,14 @@ public class PlayerHandler
 		if (event.entity.worldObj.isRemote || !(event.entity instanceof EntityPlayer))
 			return;
 
-		NBTTagCompound data = new NBTTagCompound();
-		USCExtendedPlayer extended_player =  USCExtendedPlayer.get(event.entity);
-
-		if (extended_player != null)
-		{
-			extended_player.saveNBTData(data);
-			healthManager.storePlayerData((EntityPlayer) event.entity, data);
-			LogHelper.info("%s died, storing NBT data", event.entity.getCommandSenderName());
-		}
+		LogHelper.info("Player %s died, saving NBT data", event.entity.getCommandSenderName());
+		PlayerDataManager.savePlayerNBT((EntityPlayer) event.entity);
 	}
 
 	/**
 	 * Only handles spawning of EntityPlayer's.
 	 *
-	 * @param event
+	 * @param event The EntityJoinWorldEvent.
 	 */
 	@SubscribeEvent
 	public void onPlayerRevive(EntityJoinWorldEvent event)
@@ -70,21 +63,14 @@ public class PlayerHandler
 		if (event.entity.worldObj.isRemote || !(event.entity instanceof EntityPlayer))
 			return;
 
-		NBTTagCompound data = healthManager.retrievePlayerData((EntityPlayer) event.entity);
-		USCExtendedPlayer extended_player =  USCExtendedPlayer.get(event.entity);
-
-		if (extended_player != null && data != null)
-		{
-			extended_player.loadNBTData(data);
-			extended_player.increaseRegenModifier();
-			LogHelper.info("%s revived, loading NBT data and altering regeneration rate: %d", extended_player.getPlayer().getCommandSenderName(), extended_player.getRegenRate());
-		}
+		LogHelper.info("Player %s revived, loading NBT data", event.entity.getCommandSenderName());
+		PlayerDataManager.loadPlayerNBT((EntityPlayer) event.entity);
 	}
 
 	/**
 	 * Handles registering of IEEPs for players.
 	 *
-	 * @param event
+	 * @param event The EntityConstructing event.
 	 */
 	@SubscribeEvent
 	public void onEntityConstructing(EntityEvent.EntityConstructing event)

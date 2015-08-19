@@ -5,31 +5,33 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import org.szernex.usc.handler.ConfigHandler;
 import org.szernex.usc.util.LogHelper;
 
 public class USCExtendedPlayer implements IExtendedEntityProperties
 {
 	public static final String EXT_PROP_NAME = "USCExtendedPlayer";
-	// replace all with config settings
-	public static final int BASE_REGEN_RATE = 80;
-	public static final float REGEN_MODIFIER_RATE = 1.1F;
 
 	private static final String PROP_REGEN_MODIFIER = "RegenModifier";
 
 	private final EntityPlayer player;
 
+	private int baseRegenRate;
+	private float regenModifierRate;
 	private float regenModifier;
 
 	public USCExtendedPlayer(EntityPlayer player)
 	{
 		this.player = player;
+		baseRegenRate = ConfigHandler.baseRegenRate;
+		regenModifierRate = ConfigHandler.regenModifierRate;
 		regenModifier = 1.0F;
 	}
 
 	/**
 	 * Registers a new USCExtendedPlayer IEEP for the given player.
 	 *
-	 * @param player
+	 * @param player The EntityPlayer to register.
 	 */
 	public static void register(EntityPlayer player)
 	{
@@ -39,7 +41,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 	/**
 	 * Returns the USCExtendedPlayer IEEP associated with the given player.
 	 *
-	 * @param player
+	 * @param player The EntityPlayer to retrieve the IEEP for.
 	 * @return The USCExtendedPlayer IEEP associated with the given player or null.
 	 */
 	public static USCExtendedPlayer get(Entity player)
@@ -61,6 +63,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 		properties.setFloat(PROP_REGEN_MODIFIER, regenModifier);
 
 		compound.setTag(EXT_PROP_NAME, properties);
+		LogHelper.info("Saved NBT data for %s", player.getCommandSenderName());
 	}
 
 	@Override
@@ -72,8 +75,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 			return;
 
 		regenModifier = properties.getFloat(PROP_REGEN_MODIFIER);
-
-		LogHelper.info("%s: regen modifier: %f", player.getCommandSenderName(), regenModifier);
+		LogHelper.info("Loaded NBT data for %s", player.getCommandSenderName());
 	}
 
 
@@ -94,7 +96,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 	 */
 	public float increaseRegenModifier()
 	{
-		regenModifier *= REGEN_MODIFIER_RATE;
+		regenModifier *= regenModifierRate;
 
 		return regenModifier;
 	}
@@ -114,7 +116,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 	 */
 	public int getRegenRate()
 	{
-		return (int) Math.ceil(BASE_REGEN_RATE * regenModifier);
+		return (int) Math.ceil(baseRegenRate * regenModifier);
 	}
 
 	/**
@@ -125,5 +127,10 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 	public EntityPlayer getPlayer()
 	{
 		return player;
+	}
+
+	public int getBaseRegenRate()
+	{
+		return baseRegenRate;
 	}
 }

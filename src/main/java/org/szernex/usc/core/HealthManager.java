@@ -1,18 +1,19 @@
 package org.szernex.usc.core;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import org.szernex.usc.handler.ConfigHandler;
 import org.szernex.usc.util.LogHelper;
 
 import java.util.HashMap;
 
 public class HealthManager
 {
+	public static final int DEFAULT_REGEN_RATE =    80;
+
 	private static final HealthManager instance = new HealthManager();
 
 	private HashMap<EntityPlayer, Integer> playerRegenTicks = new HashMap<>();
-	private HashMap<EntityPlayer, NBTTagCompound> playerData = new HashMap<>();
 	private int minHungerForRegen;
 
 	public static HealthManager getInstance()
@@ -24,10 +25,13 @@ public class HealthManager
 	{
 		LogHelper.debug("Initializing HealthManager");
 
-		LogHelper.info("Turning off natural health regeneration");
-		MinecraftServer.getServer().worldServerForDimension(0).getGameRules().setOrCreateGameRule("naturalRegeneration", "false");
+		if (ConfigHandler.alterRegeneration)
+		{
+			LogHelper.info("Turning off natural health regeneration");
+			MinecraftServer.getServer().worldServerForDimension(0).getGameRules().setOrCreateGameRule("naturalRegeneration", "false");
+		}
 
-		minHungerForRegen = 16; // replace with config setting
+		minHungerForRegen = ConfigHandler.minHungerForRegen;
 
 		LogHelper.info("HealthManager initialized");
 	}
@@ -35,12 +39,12 @@ public class HealthManager
 	/**
 	 * Adds the given player to the tick watch list.
 	 *
-	 * @param player
+	 * @param player The EntityPlayer to add.
 	 */
 	public void addPlayer(EntityPlayer player)
 	{
 		USCExtendedPlayer extended_player = USCExtendedPlayer.get(player);
-		int regen_rate = USCExtendedPlayer.BASE_REGEN_RATE;
+		int regen_rate = DEFAULT_REGEN_RATE;
 
 		if (extended_player != null)
 			regen_rate = extended_player.getRegenRate();
@@ -52,36 +56,30 @@ public class HealthManager
 	/**
 	 * Updates the given player for health regeneration.
 	 *
-	 * @param player
+	 * @param player The EntityPlayer to update.
 	 */
 	public void updatePlayer(EntityPlayer player)
 	{
-		if (!playerRegenTicks.containsKey(player))
-			return;
-
-		int tick_count = playerRegenTicks.get(player);
-
-		if (tick_count > 0)
-			playerRegenTicks.put(player, tick_count - 1);
-		else
+		if (ConfigHandler.alterRegeneration)
 		{
-			playerRegenTicks.put(player, USCExtendedPlayer.get(player).getRegenRate());
+			// Healing the player currently does not consume hunger!!!!!!!!!!!!
+			if (!playerRegenTicks.containsKey(player))
+				return;
 
-			if (player.shouldHeal() && player.getFoodStats().getFoodLevel() >= minHungerForRegen)
+			int tick_count = playerRegenTicks.get(player);
+
+			if (tick_count > 0)
+				playerRegenTicks.put(player, tick_count - 1);
+			else
 			{
-				LogHelper.info("Healing player %s", player.getCommandSenderName());
-				player.heal(1.0F);
+				playerRegenTicks.put(player, USCExtendedPlayer.get(player).getRegenRate());
+
+				if (player.shouldHeal() && player.getFoodStats().getFoodLevel() >= minHungerForRegen)
+				{
+					LogHelper.info("Healing player %s", player.getCommandSenderName());
+					player.heal(1.0F);
+				}
 			}
 		}
-	}
-
-	public void storePlayerData(EntityPlayer player, NBTTagCompound data)
-	{
-		playerData.put(player, data);
-	}
-
-	public NBTTagCompound retrievePlayerData(EntityPlayer player)
-	{
-		return playerData.remove(player);
 	}
 }
