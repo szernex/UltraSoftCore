@@ -8,8 +8,8 @@ With the people being so careless about their health and lifes one of these Crea
 Death should be a final state with no coming back, but after having seen this rule laid down for a while they got bored since there were no people left for their entertainment. And so this Creator decided to make things hard, but fair.
 The people will still get resurrected after death, but every death will weaken their body more and more. They will become more frail, weakening their ability to naturally restore health over time, making their skin and bones more fragile and susceptible to injuries.
 
-After all this was said and done this Creator decided to get a closer look at this world that follows their new rules and thus he wandered around the world.
-On their journey this Creator discovered that the light behaved very weird in this world. Even in the deepest caves where not the slightest shimmer of light hit the blocks were still somehow reflecting light which simply defies all logic. And so this Creator decided to do something about that.
+After all this was said and done this Creator decided to get a closer look at this world that follows their new rules and thus they wandered around the world.
+On their journey this Creator discovered that the light behaved very weird in this world. Even in the deepest caves where not the slightest shimmer of light hit, the blocks were still somehow reflecting light which simply defies all logic. And so this Creator decided to do something about that.
 Darkness is now something the people actually have to fear and do something about. No longer will you be able to start exploring caves with just a handful of torches and when you eventually run out you'll just have to deal with the slight inconvenience of slightly darker surroundings. Caves will actually go pitch black unless you light them somehow, hiding whatever is lurking in those caves.
 
 But even Creators have something similar to sympathy, and after watching countless "adventurers" going into caves unprepared and getting eaten and turned by Zombies and Skeletons this particular Creator decided to bless the world with what they call "Glowballs".
