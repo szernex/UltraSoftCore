@@ -3,6 +3,7 @@ package org.szernex.usc.core;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import org.szernex.usc.handler.ConfigHandler;
+import org.szernex.usc.util.ChatHelper;
 import org.szernex.usc.util.LogHelper;
 
 import java.util.HashMap;
@@ -80,6 +81,18 @@ public class HealthManager
 					player.getFoodStats().addExhaustion(3.0F);
 				}
 			}
+		}
+	}
+
+	public void resetPlayerHealthRegen(EntityPlayer player)
+	{
+		USCExtendedPlayer extended_player = USCExtendedPlayer.get(player);
+
+		if (extended_player != null)
+		{
+			extended_player.resetRegenModifier();
+			LogHelper.info("Regeneration modifier for %s has been reset", player.getCommandSenderName());
+			ChatHelper.sendLocalizedUserChatMsg(player, "usc.health.regen_reset");
 		}
 	}
 }

@@ -4,6 +4,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import org.szernex.usc.core.HealthManager;
 import org.szernex.usc.core.USCExtendedPlayer;
 import org.szernex.usc.util.ChatHelper;
 import org.szernex.usc.util.LogHelper;
@@ -53,13 +54,7 @@ public class CommandResetPlayerRegen extends CommandBase
 
 		String player_name = args[0];
 		EntityPlayer player = MinecraftServer.getServer().getEntityWorld().getPlayerEntityByName(player_name);
-		USCExtendedPlayer extended_player = USCExtendedPlayer.get(player);
 
-		if (extended_player != null)
-		{
-			extended_player.resetRegenModifier();
-			LogHelper.info("%s reset regeneration modifier for %s", sender.getCommandSenderName(), player_name);
-			ChatHelper.sendLocalizedUserChatMsg(player, "usc.health.regen_reset");
-		}
+		HealthManager.getInstance().resetPlayerHealthRegen(player);
 	}
 }

@@ -3,7 +3,7 @@ package org.szernex.usc.handler;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.Mod;
 import net.minecraftforge.common.config.Configuration;
-import org.szernex.usc.Reference;
+import org.szernex.usc.reference.Reference;
 
 import java.io.File;
 

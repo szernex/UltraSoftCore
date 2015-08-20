@@ -2,7 +2,7 @@ package org.szernex.usc.util;
 
 import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
-import org.szernex.usc.Reference;
+import org.szernex.usc.reference.Reference;
 
 public class LogHelper
 {
