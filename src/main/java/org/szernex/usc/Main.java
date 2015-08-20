@@ -11,6 +11,7 @@ import org.szernex.usc.core.HealthManager;
 import org.szernex.usc.handler.ConfigHandler;
 import org.szernex.usc.handler.PlayerHandler;
 import org.szernex.usc.init.ModItems;
+import org.szernex.usc.recipes.RecipeRegistry;
 import org.szernex.usc.reference.Reference;
 import org.szernex.usc.util.LogHelper;
 
@@ -29,10 +30,10 @@ public class Main
 	{
 		configFile = event.getSuggestedConfigurationFile();
 		ConfigHandler.init(configFile);
+		FMLCommonHandler.instance().bus().register(new ConfigHandler());
 
 		ModItems.init();
-
-		FMLCommonHandler.instance().bus().register(new ConfigHandler());
+		RecipeRegistry.init();
 
 		LogHelper.info("Pre initialization complete");
 	}
