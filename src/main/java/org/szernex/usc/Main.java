@@ -4,7 +4,9 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.common.MinecraftForge;
+import org.szernex.usc.commands.CommandUSC;
 import org.szernex.usc.core.HealthManager;
 import org.szernex.usc.handler.ConfigHandler;
 import org.szernex.usc.handler.PlayerHandler;
@@ -26,6 +28,12 @@ public class Main
 		ConfigHandler.init(configFile);
 
 		FMLCommonHandler.instance().bus().register(new ConfigHandler());
+	}
+
+	@Mod.EventHandler
+	public void serverStarting(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandUSC());
 	}
 
 	@Mod.EventHandler

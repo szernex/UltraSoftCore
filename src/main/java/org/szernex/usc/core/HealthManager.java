@@ -62,7 +62,6 @@ public class HealthManager
 	{
 		if (ConfigHandler.alterRegeneration)
 		{
-			// Healing the player currently does not consume hunger!!!!!!!!!!!!
 			if (!playerRegenTicks.containsKey(player))
 				return;
 
@@ -78,6 +77,7 @@ public class HealthManager
 				{
 					LogHelper.info("Healing player %s", player.getCommandSenderName());
 					player.heal(1.0F);
+					player.getFoodStats().addExhaustion(3.0F);
 				}
 			}
 		}

@@ -46,6 +46,9 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 	 */
 	public static USCExtendedPlayer get(Entity player)
 	{
+		if (player == null)
+			return null;
+
 		return (USCExtendedPlayer) player.getExtendedProperties(EXT_PROP_NAME);
 	}
 

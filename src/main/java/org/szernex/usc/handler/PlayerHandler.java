@@ -10,6 +10,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.szernex.usc.core.HealthManager;
 import org.szernex.usc.core.PlayerDataManager;
 import org.szernex.usc.core.USCExtendedPlayer;
+import org.szernex.usc.util.ChatHelper;
 import org.szernex.usc.util.LogHelper;
 
 public class PlayerHandler
@@ -48,8 +49,11 @@ public class PlayerHandler
 		if (event.entity.worldObj.isRemote || !(event.entity instanceof EntityPlayer))
 			return;
 
-		LogHelper.info("Player %s died, saving NBT data", event.entity.getCommandSenderName());
-		PlayerDataManager.savePlayerNBT((EntityPlayer) event.entity);
+		EntityPlayer player = (EntityPlayer) event.entity;
+
+		LogHelper.info("Player %s died, saving NBT data", player.getCommandSenderName());
+		PlayerDataManager.savePlayerNBT(player);
+		ChatHelper.sendLocalizedUserChatMsg(player, "usc.health.regen_increase"); // move somewhere else, preferably after respawning
 	}
 
 	/**
@@ -63,8 +67,10 @@ public class PlayerHandler
 		if (event.entity.worldObj.isRemote || !(event.entity instanceof EntityPlayer))
 			return;
 
-		LogHelper.info("Player %s revived, loading NBT data", event.entity.getCommandSenderName());
-		PlayerDataManager.loadPlayerNBT((EntityPlayer) event.entity);
+		EntityPlayer player = (EntityPlayer) event.entity;
+
+		LogHelper.info("Player %s revived, loading NBT data", player.getCommandSenderName());
+		PlayerDataManager.loadPlayerNBT(player);
 	}
 
 	/**

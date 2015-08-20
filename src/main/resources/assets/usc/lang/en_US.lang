@@ -1,0 +1,6 @@
+commands.usc.usage=/usc <resetplayerregen>
+commands.usc.resetplayerregen.usage=/usc resetplayerregen <player>
+commands.usc.error.invalid_command=Invalid command
+
+usc.health.regen_reset=Your body feels strangely rejuvenated.
+usc.health.regen_increase=Your body feels weakened after this horrible experience.
