@@ -1,0 +1,5 @@
+v1.7.10-0.1.1
+* Implemented health regeneration alteration. Until there is a proper Forge event for player health regeneration this mod sets the gamerule for naturalRegeneration to false and handles regeneration itself.
+* Upon death players have their natural health regeneration decreased. With every death it takes longer and longer for your health to regenerate. The exact rate can be set in the config.
+* Added the Fruit of Rejuvenation which resets a players stats to default. Recipe can be enabled/disabled in the config.
+* OPs can use the /usc resetplayerregen <player> command to manually reset a players stats.
