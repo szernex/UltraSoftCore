@@ -1,4 +1,6 @@
 # UltraSoftCore
+**Important: This mod requires Java 8 to run!**
+
 A Minecraft Forge mod aimed to make your life considerately harder but not as hard as UltraHardCore.
 Scroll down to the Features list if you don't like poorly written lore (I won't blame you).
 
