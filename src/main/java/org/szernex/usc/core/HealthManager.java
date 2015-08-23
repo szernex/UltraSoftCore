@@ -76,7 +76,7 @@ public class HealthManager
 
 				if (player.shouldHeal() && player.getFoodStats().getFoodLevel() >= minHungerForRegen)
 				{
-					LogHelper.info("Healing player %s", player.getCommandSenderName());
+					LogHelper.debug("Healing player %s", player.getCommandSenderName());
 					player.heal(1.0F);
 					player.getFoodStats().addExhaustion(3.0F);
 				}

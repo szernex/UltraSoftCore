@@ -66,7 +66,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 		properties.setFloat(PROP_REGEN_MODIFIER, regenModifier);
 
 		compound.setTag(EXT_PROP_NAME, properties);
-		LogHelper.info("Saved NBT data for %s", player.getCommandSenderName());
+		LogHelper.debug("Saved NBT data for %s", player.getCommandSenderName());
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 			return;
 
 		regenModifier = properties.getFloat(PROP_REGEN_MODIFIER);
-		LogHelper.info("Loaded NBT data for %s", player.getCommandSenderName());
+		LogHelper.debug("Loaded NBT data for %s", player.getCommandSenderName());
 	}
 
 
