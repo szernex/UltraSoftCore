@@ -13,7 +13,7 @@ import org.szernex.usc.core.USCExtendedPlayer;
 import org.szernex.usc.util.ChatHelper;
 import org.szernex.usc.util.LogHelper;
 
-public class PlayerHandler
+public class PlayerEventHandler
 {
 	private HealthManager healthManager = HealthManager.getInstance();
 

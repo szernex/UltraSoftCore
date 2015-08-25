@@ -1,13 +1,12 @@
-package org.szernex.usc.recipes;
+package org.szernex.usc.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.szernex.usc.handler.ConfigHandler;
-import org.szernex.usc.init.ModItems;
 import org.szernex.usc.util.LogHelper;
 
-public class RecipeRegistry
+public class Recipes
 {
 	public static void init()
 	{
