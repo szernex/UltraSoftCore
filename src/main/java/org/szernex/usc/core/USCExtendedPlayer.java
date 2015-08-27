@@ -6,12 +6,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import org.szernex.usc.handler.ConfigHandler;
+import org.szernex.usc.reference.Names;
 import org.szernex.usc.util.LogHelper;
 
 public class USCExtendedPlayer implements IExtendedEntityProperties
 {
-	public static final String EXT_PROP_NAME = "USCExtendedPlayer";
-
 	private static final String PROP_REGEN_MODIFIER = "RegenModifier";
 
 	private final EntityPlayer player;
@@ -35,7 +34,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 	 */
 	public static void register(EntityPlayer player)
 	{
-		player.registerExtendedProperties(EXT_PROP_NAME, new USCExtendedPlayer(player));
+		player.registerExtendedProperties(Names.NBT.EXTENDED_PLAYER, new USCExtendedPlayer(player));
 	}
 
 	/**
@@ -49,7 +48,7 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 		if (player == null)
 			return null;
 
-		return (USCExtendedPlayer) player.getExtendedProperties(EXT_PROP_NAME);
+		return (USCExtendedPlayer) player.getExtendedProperties(Names.NBT.EXTENDED_PLAYER);
 	}
 
 	@Override
@@ -65,14 +64,14 @@ public class USCExtendedPlayer implements IExtendedEntityProperties
 
 		properties.setFloat(PROP_REGEN_MODIFIER, regenModifier);
 
-		compound.setTag(EXT_PROP_NAME, properties);
+		compound.setTag(Names.NBT.EXTENDED_PLAYER, properties);
 		LogHelper.debug("Saved NBT data for %s", player.getCommandSenderName());
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound)
 	{
-		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
+		NBTTagCompound properties = (NBTTagCompound) compound.getTag(Names.NBT.EXTENDED_PLAYER);
 
 		if (properties == null)
 			return;

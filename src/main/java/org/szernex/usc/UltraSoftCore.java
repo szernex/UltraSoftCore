@@ -9,7 +9,9 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import org.szernex.usc.commands.CommandUSC;
 import org.szernex.usc.core.HealthManager;
 import org.szernex.usc.handler.ConfigHandler;
+import org.szernex.usc.init.ModBlocks;
 import org.szernex.usc.init.ModItems;
+import org.szernex.usc.init.TileEntities;
 import org.szernex.usc.proxy.IProxy;
 import org.szernex.usc.init.Recipes;
 import org.szernex.usc.reference.Reference;
@@ -29,6 +31,7 @@ public class UltraSoftCore
 	{
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		ModItems.init();
+		ModBlocks.init();
 
 		proxy.registerEventHandlers();
 		proxy.registerEntities();
@@ -41,6 +44,7 @@ public class UltraSoftCore
 	public void onInit(FMLInitializationEvent event)
 	{
 		Recipes.init();
+		TileEntities.init();
 
 		LogHelper.info("Initialization complete");
 	}

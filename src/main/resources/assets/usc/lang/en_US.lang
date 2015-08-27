@@ -13,3 +13,6 @@ itemGroup.usc=UltraSoftCore
 # Items
 item.usc:fruitOfRejuvenation.name=Fruit of Rejuvenation
 item.usc:glowingOrb.name=Glowing Orb
+
+# Blocks
+tile.usc:blockGlowingOrb.name=Glowing Orb
