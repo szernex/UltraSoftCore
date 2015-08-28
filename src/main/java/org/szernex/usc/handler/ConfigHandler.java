@@ -18,7 +18,7 @@ public class ConfigHandler
 	public static int baseRegenRate =                   80;
 	public static float regenModifierRate =             1.1F;
 	public static boolean recipeFruitOfRejuvenation =   true;
-	public static int glowingOrbTimeToLive =            5; // TODO: debugging
+	public static int glowingOrbTimeToLive =            180;
 
 
 	public static void init(File file)
