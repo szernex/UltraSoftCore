@@ -29,7 +29,7 @@ public class TEGlowingOrb extends TileEntity
 
 		compound.setInteger(NBT_TIME_TO_LIVE, timeToLive);
 
-		LogHelper.info("NBT saved: timeToLive: %d", timeToLive);
+		LogHelper.debug("NBT saved: timeToLive: %d", timeToLive);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class TEGlowingOrb extends TileEntity
 		if (compound.hasKey(NBT_TIME_TO_LIVE))
 			timeToLive = compound.getInteger(NBT_TIME_TO_LIVE);
 
-		LogHelper.info("NBT read: timeToLive: %d", timeToLive);
+		LogHelper.debug("NBT read: timeToLive: %d", timeToLive);
 	}
 
 	@Override
@@ -52,14 +52,11 @@ public class TEGlowingOrb extends TileEntity
 		if (timeToLive > 0)
 			--timeToLive;
 
-		if (timeToLive % 20 == 0)
-			LogHelper.info("time to live: %d", timeToLive);
-
 		if (timeToLive == 0)
 		{
 			if (worldObj.getBlock(xCoord, yCoord, zCoord) instanceof BlockGlowingOrb)
 			{
-				LogHelper.info("Removing Glowing Orb at %d %d %d", xCoord, yCoord, zCoord);
+				LogHelper.debug("Removing Glowing Orb at %d %d %d", xCoord, yCoord, zCoord);
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 			}
 
