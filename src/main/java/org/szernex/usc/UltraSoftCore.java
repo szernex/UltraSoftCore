@@ -17,7 +17,7 @@ import org.szernex.usc.init.Recipes;
 import org.szernex.usc.reference.Reference;
 import org.szernex.usc.util.LogHelper;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, acceptableRemoteVersions = "*")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class UltraSoftCore
 {
 	@Mod.Instance(Reference.MOD_ID)
