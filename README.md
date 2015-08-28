@@ -23,4 +23,4 @@ Who knows what else this bored and slightly sadistic Creator will think of to ma
 * Altered natural regeneration - each death weakens the player, impacting the rate of health regeneration, their strength and resistance
 * Wounds - players may bleed upon getting shot by an arrow or bitten by sharp teeth, prepare your bandages (tbd)
 * Altered block lighting - where there is no light source there is also no light, blocks will no longer have a minimum block light (tbd)
-* Glowballs - throwable temporary light sources that even work under water (tbd)
+* Glowballs - throwable temporary light sources that even work under water (WIP)
