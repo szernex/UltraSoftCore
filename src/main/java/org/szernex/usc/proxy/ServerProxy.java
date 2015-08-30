@@ -11,7 +11,7 @@ public class ServerProxy extends CommonProxy
 	@Override
 	public void registerEventHandlers()
 	{
-
+		super.registerEventHandlers();
 	}
 
 	@Override
